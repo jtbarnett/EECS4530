@@ -1,0 +1,4 @@
+﻿  BasicRoutines(1).cpp
+C:\Users\Jake\Documents\EECS 4530\Project 0\BasicRoutines(1).cpp(162,2): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\Jake\Documents\EECS 4530\Project 0\BasicRoutines(1).cpp(201,2): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+  Project 0.vcxproj -> C:\Users\Jake\Documents\EECS 4530\Project 0\x64\Debug\Project 0.exe
