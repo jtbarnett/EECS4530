@@ -287,7 +287,7 @@ void timer(int value) {
 void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	vmath::mat4 currentMatrix = vmath::rotate(rotationAngle, 0.56f, 0.56f, 0.56f);
+	vmath::mat4 currentMatrix = vmath::rotate(rotationAngle, 0.57f, 0.57f, 0.57f);
 	glUniformMatrix4fv(locationMap["modelingTransform"], 1, GL_TRUE, currentMatrix);
 
 	glBindVertexArray(vertexBuffers[0]);
