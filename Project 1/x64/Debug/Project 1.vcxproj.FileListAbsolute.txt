@@ -1,0 +1,2 @@
+C:\Users\Jake\Documents\EECS 4530\Project 1\x64\Debug\Project 1.exe
+C:\Users\Jake\Documents\EECS 4530\Project 1\x64\Debug\Project 1.pdb

@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 1\main.cpp(159,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 1\main.cpp(195,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 1\main.cpp(232,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Project 1.vcxproj -> C:\Users\Jake\Documents\EECS 4530\Project 1\x64\Debug\Project 1.exe

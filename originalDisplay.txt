@@ -1,0 +1,32 @@
+/*
+ * The display routine is basically unchanged at this point.
+ */
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// needed
+	vmath::mat4 currentMatrix = vmath::rotate(rotationAngle, 0.0f, 1.0f, 0.0f);
+	vmath::mat4 translateMatrix;
+	vmath::mat4 viewingTransform;
+	vmath::mat4 projectionTransform;
+
+	projectionTransform = vmath::ortho(-6.0f, 6.0f, -6.0f, 6.0f, -20.0f, 20.0f);   // Use a 12x12x12 cube centered at the origin.
+
+	glUniformMatrix4fv(locationMap["projectionTransform"], 1, GL_FALSE, projectionTransform);
+
+	/* for Orthographic We don't need a view transformation unless we want to rotate the camera or point it somewhere
+	 * other than down the z axis.  We will use the identity matrix here.
+	 */
+	viewingTransform = vmath::scale(1.0f);
+
+	glUniformMatrix4fv(locationMap["viewingTransform"], 1, GL_FALSE,
+		viewingTransform);
+
+	/*
+	 *  Draw everything in the objectList.  The actual objects are set up in
+	 *  the buildObjects function.
+	 *
+	 */
+	for (Drawable* d : objectList) {
+		d->draw();
+	}
+	glutSwapBuffers();  // if double buffered
+}

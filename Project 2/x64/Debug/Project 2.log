@@ -1,0 +1,15 @@
+﻿  Project2Main.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(188,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(234,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(278,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(322,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(367,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(412,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(456,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(501,106): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(546,106): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(591,106): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(636,106): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(764,29): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(768,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+  Project 2.vcxproj -> C:\Users\Jake\Documents\EECS 4530\Project 2\x64\Debug\Project 2.exe

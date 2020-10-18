@@ -272,7 +272,7 @@ void init(string vertexShader, string fragmentShader) {
 * Timer routine -- when called it increments the angle by 1 degree,
 * tells Glut to redraw the screen, and sets a timer for 1/30 of a
 * second later.
-*/
+*/ 
 void timer(int value) {
 	rotationAngle += 1.0f;
 	if (rotationAngle >= 360.0)
