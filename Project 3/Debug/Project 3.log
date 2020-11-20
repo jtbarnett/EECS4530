@@ -1,0 +1,49 @@
+﻿  LoadShaders.cpp
+  PositionInfo.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 3\vmath.h(1022,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Project3Main.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 3\Project3Main.cpp(291,2): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+  readfile.cpp
+  Generating Code...
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewAttachShader
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewCompileShader
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewCreateProgram
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewCreateShader
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewDeleteShader
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewGetProgramInfoLog
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewGetProgramiv
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewGetProgramiv
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewGetShaderInfoLog
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewGetShaderiv
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewLinkProgram
+LoadShaders.obj : error LNK2001: unresolved external symbol ___glewShaderSource
+PositionInfo.obj : error LNK2019: unresolved external symbol __imp____glewBindBuffer referenced in function "public: virtual void __thiscall PositionInfo::draw(void)" (?draw@PositionInfo@@UAEXXZ)
+PositionInfo.obj : error LNK2019: unresolved external symbol __imp____glewUniformMatrix3fv referenced in function "public: virtual void __thiscall PositionInfo::draw(void)" (?draw@PositionInfo@@UAEXXZ)
+PositionInfo.obj : error LNK2019: unresolved external symbol __imp____glewUniformMatrix4fv referenced in function "public: virtual void __thiscall PositionInfo::draw(void)" (?draw@PositionInfo@@UAEXXZ)
+PositionInfo.obj : error LNK2019: unresolved external symbol __imp____glewBindVertexArray referenced in function "public: virtual void __thiscall PositionInfo::draw(void)" (?draw@PositionInfo@@UAEXXZ)
+Project3Main.obj : error LNK2019: unresolved external symbol _glewInit@0 referenced in function "int __cdecl glutStartUp(int &,char * * const,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?glutStartUp@@YAHAAHQAPADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutInitWindowSize@8 referenced in function "int __cdecl glutStartUp(int &,char * * const,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?glutStartUp@@YAHAAHQAPADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutInitDisplayMode@4 referenced in function "int __cdecl glutStartUp(int &,char * * const,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?glutStartUp@@YAHAAHQAPADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutMainLoop@0 referenced in function _main
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutPostRedisplay@0 referenced in function "void __cdecl timer(int)" (?timer@@YAXH@Z)
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutTimerFunc@12 referenced in function "void __cdecl timer(int)" (?timer@@YAXH@Z)
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutDisplayFunc@4 referenced in function _main
+Project3Main.obj : error LNK2019: unresolved external symbol __imp____glutInitWithExit@12 referenced in function _glutInit_ATEXIT_HACK@8
+Project3Main.obj : error LNK2019: unresolved external symbol __imp____glutCreateWindowWithExit@8 referenced in function _glutCreateWindow_ATEXIT_HACK@4
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutInitContextVersion@8 referenced in function "int __cdecl glutStartUp(int &,char * * const,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?glutStartUp@@YAHAAHQAPADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Project3Main.obj : error LNK2019: unresolved external symbol __imp__glutInitContextProfile@4 referenced in function "int __cdecl glutStartUp(int &,char * * const,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?glutStartUp@@YAHAAHQAPADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewBindBuffer
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewBufferData
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewBufferSubData
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewGenBuffers
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewEnableVertexAttribArray
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewGetActiveUniform
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewGetAttribLocation
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewUniformMatrix4fv
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewUseProgram
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewVertexAttribPointer
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewBindVertexArray
+Project3Main.obj : error LNK2001: unresolved external symbol ___glewGenVertexArrays
+C:\Users\Jake\Documents\EECS 4530\Additional Files\Project 0\lib\x64\freeglut.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Jake\Documents\EECS 4530\Additional Files\Project 0\lib\x64\glew32s.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Jake\Documents\EECS 4530\Project 3\Debug\Project 3.exe : fatal error LNK1120: 38 unresolved externals

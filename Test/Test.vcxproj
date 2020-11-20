@@ -140,9 +140,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="new.cpp" />
+    <ClCompile Include="prac1.cpp" />
     <ClCompile Include="Test1 - Question2.cpp" />
     <ClCompile Include="Test1 - Question3.cpp" />
     <ClCompile Include="Test1 - Question4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\opengl\Code\Tut17-Texture\Shaders\fragmentShader.fsh" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\opengl\Code\Tut17-Texture\Shaders\vertexShader.vsh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -27,5 +27,18 @@
     <ClCompile Include="new.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="prac1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\opengl\Code\Tut17-Texture\Shaders\fragmentShader.fsh">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\opengl\Code\Tut17-Texture\Shaders\vertexShader.vsh">
+      <Filter>Source Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

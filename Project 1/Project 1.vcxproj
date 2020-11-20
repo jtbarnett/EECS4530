@@ -163,6 +163,10 @@
     <ClInclude Include="vgl.h" />
     <ClInclude Include="vmath.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="project0.frag" />
+    <None Include="project0a.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

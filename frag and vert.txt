@@ -1,0 +1,41 @@
+#version 330 core
+/*
+ * This is a simple vertex shader that has inputs for modeling,
+ * projection and viewing transforms.  It does not do lighting
+ * and does not use any normal information at this time.
+ */
+
+uniform mat4 modelingTransform;
+uniform mat4 projectionTransform;
+uniform mat4 viewingTransform;
+
+in vec4 vPosition;		// vertex position (passed in)
+in vec2 vertexUV;		// vertex UV (passed in)
+
+out vec2 uv;			// the color being passed out to the fragment shader
+
+void main() {
+	uv = vertexUV;
+
+	// do the projection thing now...
+	gl_Position = projectionTransform * 
+	              viewingTransform * 
+				  modelingTransform * vPosition/vPosition.w;
+}
+
+
+
+
+
+#version 330 core
+
+out vec4 fragColor;
+
+in vec2 uv;
+
+uniform sampler2D u_texture;
+
+void main() {
+	vec4 fragment = texture(u_texture, uv);
+	fragColor = fragment;
+}

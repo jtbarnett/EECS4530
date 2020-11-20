@@ -1,4 +1,7 @@
-﻿  Project2Main.cpp
+﻿  LoadShaders.cpp
+  PositionInfo.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 2\vmath.h(1022,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Project2Main.cpp
 C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(188,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(234,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(278,100): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
@@ -12,4 +15,12 @@ C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(591,106): warning C
 C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(636,106): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(764,29): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
 C:\Users\Jake\Documents\EECS 4530\Project 2\Project2Main.cpp(768,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+  readfile.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4217: symbol '__glewBindBuffer' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+LINK : warning LNK4217: symbol '__glewUniformMatrix3fv' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+LINK : warning LNK4217: symbol '__glewUniformMatrix4fv' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+LINK : warning LNK4217: symbol '__glewBindVertexArray' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Jake\Documents\EECS 4530\Project 2\x64\Debug\vc120.pdb'; linking object as if no debug info
   Project 2.vcxproj -> C:\Users\Jake\Documents\EECS 4530\Project 2\x64\Debug\Project 2.exe

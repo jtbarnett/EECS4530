@@ -1,0 +1,302 @@
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GL/freeglut.h>
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include "LoadShaders.h"
+#include "vmath.h"
+#include "vgl.h"
+#include <map>
+#include <vector>
+#include "PositionInfo.h"
+
+using namespace std;
+
+#define BUFFER_OFFSET(x)  ((const void*) (x))
+
+GLuint programID;
+
+/*
+* Arrays to store the indices/names of the Vertex Array Objects and
+* Buffers.  Rather than using the books enum approach I've just
+* gone out and made a bunch of them and will use them as needed.
+*
+* Not the best choice I'm sure.
+*/
+GLuint vertexBuffers[11], arrayBuffers[11], elementBuffers[11];
+
+/*
+* Global variables
+*   The location for the transformation and the current rotation
+*   angle are set up as globals since multiple methods need to
+*   access them.
+*/
+float rotationAngle = 1.0f;
+bool elements;
+int nbrTriangles, materialToUse = 0;
+int startTriangle = 0, endTriangle = 12;
+map<string, GLuint> locationMap;
+vector<Drawable*> objectList;
+float angle = 0.0f;
+vmath::vec3 xAxis = vmath::vec3(1.0f, 0.0f, 0.0f);
+vmath::vec3 yAxis = vmath::vec3(0.0f, 1.0f, 0.0f);
+vmath::vec3 zAxis = vmath::vec3(0.0f, 0.0f, 1.0f);
+
+// List of objects
+PositionInfo* carousel;
+PositionInfo* crate1;
+
+// Prototypes
+GLuint buildProgram(string vertexShaderName, string fragmentShaderName);
+int glutStartUp(int& argCount, char* argValues[],
+	string windowTitle = "No Title", int width = 500, int height = 500);
+void setAttributes(float lineWidth = 1.0, GLenum face = GL_FRONT_AND_BACK,
+	GLenum fill = GL_FILL);
+void buildObjects();
+void getLocations();
+void init(string vertexShader, string fragmentShader);
+void readfile(string filename, vector<float>& vertices, vector<unsigned int>& indices);
+void readfile2(string filename, vector<float>& vertices, vector<float>& normals);
+void readfile3(string filename, vector<float>& vertices, vector<float>& normals, vector<float>& texture);
+
+/*
+ * Routine to encapsulate some of the startup routines for GLUT.  It returns the window ID of the
+ * single window that is created.
+ */
+int glutStartUp(int& argCount, char* argValues[], string title, int width, int height) {
+	int windowID;
+	GLenum glewErrCode;
+
+	glutInit(&argCount, argValues);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+	glutInitWindowSize(width, height);
+	windowID = glutCreateWindow(title.c_str());
+
+	glutInitContextVersion(3, 1);
+	glutInitContextProfile(GLUT_CORE_PROFILE);
+	glewErrCode = glewInit();
+	if (glewErrCode != GLEW_OK) {
+		cerr << "Glew init failed " << glewErrCode << endl;
+		exit(EXIT_FAILURE);
+	}
+	return windowID;
+}
+
+/*
+ * Use the author's routines to build the program and return the program ID.
+ */
+GLuint buildProgram(string vertexShaderName, string fragmentShaderName) {
+	ShaderInfo shaders[] = {
+		{ GL_VERTEX_SHADER, vertexShaderName.c_str() },
+		{ GL_FRAGMENT_SHADER, fragmentShaderName.c_str() },
+		{ GL_NONE, NULL }
+	};
+	GLuint program = LoadShaders(shaders);
+	if (program == 0) {
+		cerr << "GLSL Program didn't load.  Error \n" << endl
+			<< "Vertex Shader = " << vertexShaderName << endl
+			<< "Fragment Shader = " << fragmentShaderName << endl;
+	}
+	glUseProgram(program);
+	return program;
+}
+
+/*
+ * Set up the clear color, lineWidth, and the fill type for the display.
+ */
+void setAttributes(float lineWidth, GLenum face, GLenum fill) {
+	/*
+	* I'm using wide lines so that they are easier to see on the screen.
+	* In addition, this version fills in the polygons rather than leaving it
+	* as lines.
+	*/
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glLineWidth(lineWidth);
+	glPolygonMode(face, fill);
+	glEnable(GL_DEPTH_TEST);
+}
+
+/*
+ * read and/or build the objects to be displayed.  Also sets up attributes that are
+ * vertex related.
+ */
+void buildObjects() {
+	GLuint vPosition = glGetAttribLocation(programID, "vPosition");
+	GLuint vColor = glGetAttribLocation(programID, "vColor");
+	//GLuint vNormal = glGetAttribLocation(programID, "vNormal");
+
+	float redTree1 = 0.133f, greenTree1 = 0.545f, blueTree1 = 0.133f, alphaTree = 1.0f;		// forrest green
+
+	// Carousel
+	/*vector<float> fileVerticesCarousel, fileNormalsCarousel, fileTexturesCarousel;
+	readfile3("carousel.obj", fileVerticesCarousel, fileNormalsCarousel, fileTexturesCarousel);
+	glGenVertexArrays(1, &(vertexBuffers[0]));
+	glBindVertexArray(vertexBuffers[0]);
+	glGenBuffers(1, &(arrayBuffers[0]));
+	glBindBuffer(GL_ARRAY_BUFFER, arrayBuffers[0]);
+	glBufferData(GL_ARRAY_BUFFER,
+		fileVerticesCarousel.size() * sizeof(float) + (fileVerticesCarousel.size() / 3) * 4 * sizeof(float),
+		NULL, GL_STATIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, fileVerticesCarousel.size() * sizeof(float), fileVerticesCarousel.data());
+	float* fileColorsCarousel = new float[fileVerticesCarousel.size() / 3 * 4];
+	float redCarousel = 0.635f, greenCarousel = 0.486f, blueCarousel = 0.635f, alphaCarousel = 1.0f;
+	for (unsigned int currentVertex = 0; currentVertex < fileVerticesCarousel.size() / 3; currentVertex++) {
+		fileColorsCarousel[currentVertex * 4] = redCarousel;
+		fileColorsCarousel[currentVertex * 4 + 1] = greenCarousel;
+		fileColorsCarousel[currentVertex * 4 + 2] = blueCarousel;
+		fileColorsCarousel[currentVertex * 4 + 3] = alphaCarousel;
+	}
+	glBufferSubData(GL_ARRAY_BUFFER, fileVerticesCarousel.size() * sizeof(float), fileVerticesCarousel.size() / 3 * 4 * sizeof(float), fileColorsCarousel);
+	glBufferSubData(GL_ARRAY_BUFFER, fileVerticesCarousel.size() * sizeof(float) +
+		fileVerticesCarousel.size() / 3 * 4 * sizeof(float),
+		fileNormalsCarousel.size() * sizeof(float), fileNormalsCarousel.data());
+
+	vPosition = glGetAttribLocation(programID, "vPosition");
+	glEnableVertexAttribArray(vPosition);
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+
+	vColor = glGetAttribLocation(programID, "vColor");
+	glEnableVertexAttribArray(vColor);
+	glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(fileVerticesCarousel.size() * sizeof(float)));
+
+	vNormal = glGetAttribLocation(programID, "vNormal");
+	glEnableVertexAttribArray(vNormal);
+	glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_TRUE, 0,
+		BUFFER_OFFSET(fileVerticesCarousel.size() * sizeof(float) +
+			fileVerticesCarousel.size() / 3 * 4 * sizeof(float)));
+
+	carousel = new PositionInfo(vertexBuffers[0], arrayBuffers[0],
+		fileVerticesCarousel.size() / 3, locationMap["modelingMatrix"],
+		vmath::scale(0.4f, 0.4f, 0.4f), vmath::vec4(1.0f, 1.0f, 1.0f, 1.0f), locationMap["normalMatrix"]);
+
+	carousel->addRotation(-90.0f, xAxis);
+	carousel->addTranslation(0.0f, -2.0f, 0.0f);
+	objectList.push_back(carousel);*/
+
+
+	// Crate 1
+	vector<float> fileVertices, fileNormals, fileTextures;
+	readfile3("Crate.obj", fileVertices, fileNormals, fileTextures);
+	glGenVertexArrays(1, &(vertexBuffers[0]));
+	glBindVertexArray(vertexBuffers[0]);
+	glGenBuffers(1, &(arrayBuffers[0]));
+	glBindBuffer(GL_ARRAY_BUFFER, arrayBuffers[0]);
+	glBufferData(GL_ARRAY_BUFFER,
+		fileVertices.size() * sizeof(float) + (fileVertices.size() / 3) * 4 * sizeof(float),
+		NULL, GL_STATIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, fileVertices.size() * sizeof(float), fileVertices.data());
+	float* fileColors = new float[fileVertices.size() / 3 * 4];
+	for (unsigned int currentVertex = 0; currentVertex < fileVertices.size() / 3; currentVertex++) {
+		fileColors[currentVertex * 4] = redTree1;
+		fileColors[currentVertex * 4 + 1] = greenTree1;
+		fileColors[currentVertex * 4 + 2] = blueTree1;
+		fileColors[currentVertex * 4 + 3] = alphaTree;
+	}
+	glBufferSubData(GL_ARRAY_BUFFER, fileVertices.size() * sizeof(float), fileVertices.size() / 3 * 4 * sizeof(float), fileColors);
+	glBufferSubData(GL_ARRAY_BUFFER, fileVertices.size() * sizeof(float) +
+		fileVertices.size() / 3 * 4 * sizeof(float),
+		fileNormals.size() * sizeof(float), fileNormals.data());
+
+	vPosition = glGetAttribLocation(programID, "vPosition");
+	glEnableVertexAttribArray(vPosition);
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+
+	vColor = glGetAttribLocation(programID, "vColor");
+	glEnableVertexAttribArray(vColor);
+	glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(fileVertices.size() * sizeof(float)));
+
+	/*vNormal = glGetAttribLocation(programID, "vNormal");
+	glEnableVertexAttribArray(vNormal);
+	glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_TRUE, 0,
+		BUFFER_OFFSET(fileVertices.size() * sizeof(float) +
+			fileVertices.size() / 3 * 4 * sizeof(float)));*/
+
+	crate1 = new PositionInfo(vertexBuffers[0], arrayBuffers[0],
+		fileVertices.size() / 3, locationMap["modelingTransform"],
+		vmath::scale(0.8f, 0.8f, 0.8f), vmath::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+	//crate1->addTranslation(0.0f, 0.0f, 0.0f);
+	objectList.push_back(crate1);
+}
+
+/*
+ * This fills in the locations of most of the uniform variables for the program.
+ * there are better ways of handling this but this is good in going directly from
+ * what we had.
+ *
+ * Revised to get the locations and names of the uniforms from OpenGL.  These
+ * are then stored in a map so that we can look up a uniform by name when we
+ * need to use it.  The map is still global but it is a little neater than the
+ * version that used all the locations.  The locations are still there right now
+ * in case that is more useful for you.
+ *
+ */
+void getLocations() {
+	/*
+	 * Find out how many uniforms there are and go out there and get them from the
+	 * shader program.  The locations for each uniform are stored in a global -- locationMap --
+	 * for later retrieval.
+	 */
+	GLint numberBlocks;
+	char uniformName[1024];
+	int nameLength;
+	GLint size;
+	GLenum type;
+	glGetProgramiv(programID, GL_ACTIVE_UNIFORMS, &numberBlocks);
+	for (int blockIndex = 0; blockIndex < numberBlocks; blockIndex++) {
+		glGetActiveUniform(programID, blockIndex, 1024, &nameLength, &size, &type, uniformName);
+		cout << uniformName << endl;
+		locationMap[string(uniformName)] = blockIndex;
+	}
+}
+
+void init(string vertexShader, string fragmentShader) {
+	setAttributes(1.0f, GL_FRONT_AND_BACK, GL_FILL);
+	programID = buildProgram(vertexShader, fragmentShader);
+	getLocations();
+	buildObjects();
+}
+
+/*
+* Function for rotating the carousel object
+*/
+void timer(int value) {
+	carousel->addRotation(rotationAngle, yAxis);
+	glutPostRedisplay();
+	glutTimerFunc(1000 / 30, timer, 1);
+}
+
+/*
+ * The display routine is basically unchanged at this point.
+ */
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	vmath::mat4 translateMatrix;
+	vmath::mat4 viewingTransform;
+	vmath::mat4 projectionTransform;
+
+	projectionTransform = vmath::perspective(60.0f, 1.0f, 1.0f, 100.0f);
+	glUniformMatrix4fv(locationMap["projectionTransform"], 1, GL_FALSE, projectionTransform);
+
+	viewingTransform = vmath::lookat(vmath::vec3(0.0f, 0.0f, 10.0f), vmath::vec3(0.0f, 0.0f, 0.0f), vmath::vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(locationMap["viewingTransform"], 1, GL_FALSE, viewingTransform);
+
+	/*glUniformMatrix3fv(locationMap["normalMatrix"], 1, GL_FALSE,
+		vmath::mat3(vmath::vec3(1.0f, 0.0f, 0.0f),
+			vmath::vec3(0.0f, 1.0f, 0.0f),
+			vmath::vec3(0.0f, 0.0f, 1.0f)));*/
+
+	for (Drawable* d : objectList) {
+		d->draw();
+	}
+	glutSwapBuffers();
+}
+
+int main(int argCount, char* argValues[]) {
+	glutStartUp(argCount, argValues, "My Test of New Routines");
+	init("project0a.vert", "project0.frag");
+	glutDisplayFunc(display);
+	//glutTimerFunc(1000 / 30, timer, 1);
+	glutMainLoop();
+}

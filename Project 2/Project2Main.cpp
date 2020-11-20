@@ -717,10 +717,7 @@ void display() {
 	viewingTransform = vmath::lookat(vmath::vec3(x, 0.0f, z), vmath::vec3(x + xDirection, 0.0f, z + zDirection), vmath::vec3(0.0f, 1.0f, 0.0f));
 	glUniformMatrix4fv(locationMap["viewingMatrix"], 1, GL_FALSE, viewingTransform);
 
-	glUniformMatrix3fv(locationMap["normalMatrix"], 1, GL_FALSE,
-		vmath::mat3(vmath::vec3(1.0f, 0.0f, 0.0f),
-			vmath::vec3(0.0f, 1.0f, 0.0f),
-			vmath::vec3(0.0f, 0.0f, 1.0f)));
+	glUniformMatrix3fv(locationMap["normalMatrix"], 1, GL_FALSE, vmath::mat3(vmath::vec3(1.0f, 0.0f, 0.0f), vmath::vec3(0.0f, 1.0f, 0.0f), vmath::vec3(0.0f, 0.0f, 1.0f)));
 
 	for (Drawable* d : objectList) {
 		d->draw();

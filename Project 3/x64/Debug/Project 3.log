@@ -1,0 +1,14 @@
+﻿  LoadShaders.cpp
+  PositionInfo.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 3\vmath.h(1022,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Project3Main.cpp
+C:\Users\Jake\Documents\EECS 4530\Project 3\Project3Main.cpp(291,2): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+  readfile.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4217: symbol '__glewBindBuffer' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+LINK : warning LNK4217: symbol '__glewUniformMatrix3fv' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+LINK : warning LNK4217: symbol '__glewUniformMatrix4fv' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+LINK : warning LNK4217: symbol '__glewBindVertexArray' defined in 'glew32s.lib(glew.obj)' is imported by 'PositionInfo.obj' in function '"public: virtual void __cdecl PositionInfo::draw(void)" (?draw@PositionInfo@@UEAAXXZ)'
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Jake\Documents\EECS 4530\Project 3\x64\Debug\vc120.pdb'; linking object as if no debug info
+  Project 3.vcxproj -> C:\Users\Jake\Documents\EECS 4530\Project 3\x64\Debug\Project 3.exe

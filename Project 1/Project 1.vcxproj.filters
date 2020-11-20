@@ -45,4 +45,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="project0.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="project0a.vert">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
